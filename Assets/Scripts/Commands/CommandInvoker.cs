@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CommandInvoker
+namespace Command.Commands
 {
-    private Stack<ICommand> commandRegistry = new Stack<ICommand>();
-
-    public void ProcessCommand(ICommand commandToProcess)
+    public class CommandInvoker
     {
-        ExecuteCommand(commandToProcess);
-        RegisterCommand(commandToProcess);
+        private Stack<ICommand> commandRegistry = new Stack<ICommand>();
+
+        public void ProcessCommand(ICommand commandToProcess)
+        {
+            ExecuteCommand(commandToProcess);
+            RegisterCommand(commandToProcess);
+        }
+        public void ExecuteCommand(ICommand commandToExecute) => commandToExecute.Execute();
+        public void RegisterCommand(ICommand commandToRegister) => commandRegistry.Push(commandToRegister);
     }
-    public void ExecuteCommand(ICommand commandToExecute) => commandToExecute.Execute();
-    public void RegisterCommand(ICommand commandToRegister) => commandRegistry.Push(commandToRegister);
 }
