@@ -14,6 +14,8 @@ namespace Command.Input
         private CommandType selectedActionType;
         private TargetType targetType;
 
+        private CommandType selectedCommandType;
+
         public InputService()
         {
             mouseInputHandler = new MouseInputHandler(this);

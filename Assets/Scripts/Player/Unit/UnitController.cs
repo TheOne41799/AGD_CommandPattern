@@ -4,6 +4,7 @@ using Command.Actions;
 using System.Collections;
 using System;
 using Object = UnityEngine.Object;
+using Command.Commands;
 
 namespace Command.Player
 {
@@ -160,6 +161,8 @@ namespace Command.Player
             else
                 return unitView.transform.position - unitScriptableObject.EnemyBattlePositionOffset;
         }
+
+        public void ProcessUnitCommand(UnitCommand commandToProcess) => GameService.Instance.CommandInvoker.ProcessCommand(commandToProcess);
     }
 
     public enum UnitUsedState
