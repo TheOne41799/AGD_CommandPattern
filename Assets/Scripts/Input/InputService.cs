@@ -1,6 +1,8 @@
 using Command.Main;
 using Command.Player;
 using Command.Actions;
+using Command.Commands;
+using static Command.Commands.UnitCommand;
 
 namespace Command.Input
 {
@@ -48,7 +50,22 @@ namespace Command.Input
         public void OnTargetSelected(UnitController targetUnit)
         {
             SetInputState(InputState.EXECUTING_INPUT);
-            GameService.Instance.PlayerService.PerformAction(selectedActionType, targetUnit);
+            //GameService.Instance.PlayerService.PerformAction(selectedActionType, targetUnit);
+
+            UnitCommand commandToProcess = CreateUnitCommand(targetUnit);
+
+            GameService.Instance.ProcessUnitCommand(commandToProcess);
+
+        }
+
+        private CommandData CreateCommandData(UnitController targetUnit)
+        {
+            return new CommandData(
+                GameService.Instance.PlayerService.ActiveUnitID,
+                targetUnit.UnitID,
+                GameService.Instance.PlayerService.ActivePlayerID,
+                targetUnit.Owner.PlayerID
+            );
         }
     }
 }
