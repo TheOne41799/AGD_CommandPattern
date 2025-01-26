@@ -51,6 +51,7 @@ namespace Command.Main
             BattleService = new BattleService(battleScriptableObjects);
             PlayerService = new PlayerService();
             uiService.Init(battleScriptableObjects.Count);
+            CommandInvoker = new CommandInvoker();
         }
 
         private void Update() => InputService.UpdateInputService();

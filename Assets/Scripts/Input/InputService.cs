@@ -1,8 +1,6 @@
 using Command.Main;
 using Command.Player;
-using Command.Actions;
 using Command.Commands;
-using static Command.Commands.UnitCommand;
 
 namespace Command.Input
 {
@@ -11,10 +9,8 @@ namespace Command.Input
         private MouseInputHandler mouseInputHandler;
 
         private InputState currentState;
-        private CommandType selectedActionType;
-        private TargetType targetType;
-
         private CommandType selectedCommandType;
+        private TargetType targetType;
 
         public InputService()
         {
@@ -24,6 +20,8 @@ namespace Command.Input
         }
 
         public void SetInputState(InputState inputStateToSet) => currentState = inputStateToSet;
+
+        //private void SubscribeToEvents() => GameService.Instance.EventService.OnActionSelected.AddListener(OnActionSelected);
 
         private void SubscribeToEvents() => GameService.Instance.EventService.OnActionSelected.AddListener(OnActionSelected);
 
@@ -35,7 +33,7 @@ namespace Command.Input
 
         public void OnActionSelected(CommandType selectedActionType)
         {
-            this.selectedActionType = selectedActionType;
+            this.selectedCommandType = selectedActionType;
             SetInputState(InputState.SELECTING_TARGET);
             TargetType targetType = SetTargetType(selectedActionType);
             ShowTargetSelectionUI(targetType);
@@ -51,27 +49,22 @@ namespace Command.Input
 
         public void OnTargetSelected(UnitController targetUnit)
         {
-            SetInputState(InputState.EXECUTING_INPUT);
+            /*SetInputState(InputState.EXECUTING_INPUT);
             //GameService.Instance.PlayerService.PerformAction(selectedActionType, targetUnit);
 
             UnitCommand commandToProcess = CreateUnitCommand(targetUnit);
 
+            GameService.Instance.ProcessUnitCommand(commandToProcess);*/
+
+            SetInputState(InputState.EXECUTING_INPUT);
+            UnitCommand commandToProcess = CreateUnitCommand(targetUnit);
             GameService.Instance.ProcessUnitCommand(commandToProcess);
 
         }
 
-        private CommandData CreateCommandData(UnitController targetUnit)
-        {
-            return new CommandData(
-                GameService.Instance.PlayerService.ActiveUnitID,
-                targetUnit.UnitID,
-                GameService.Instance.PlayerService.ActivePlayerID,
-                targetUnit.Owner.PlayerID
-            );
-        }
-
         private UnitCommand CreateUnitCommand(UnitController targetUnit)
         {
+
             CommandData commandData = CreateCommandData(targetUnit);
 
             switch (selectedCommandType)
@@ -91,9 +84,16 @@ namespace Command.Input
                 case CommandType.ThirdEye:
                     return new ThirdEyeCommand(commandData);
                 default:
-                    // If the selectedCommandType is not recognized, throw an exception.
                     throw new System.Exception($"No Command found of type: {selectedCommandType}");
             }
+        }
+
+        private CommandData CreateCommandData(UnitController targetUnit)
+        {
+            return new CommandData(GameService.Instance.PlayerService.ActiveUnitID,
+                                   targetUnit.UnitID,
+                                   GameService.Instance.PlayerService.ActivePlayerID,
+                                   targetUnit.Owner.PlayerID);
         }
     }
 }

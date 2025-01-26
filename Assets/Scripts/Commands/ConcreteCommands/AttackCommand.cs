@@ -1,16 +1,12 @@
-using Command.Actions;
 using Command.Main;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace Command.Commands
 {
-    public class BerserkAttackCommand : UnitCommand
+    public class AttackCommand : UnitCommand
     {
         private bool willHitTarget;
 
-        public BerserkAttackCommand(CommandData commandData)
+        public AttackCommand(CommandData commandData)
         {
             this.commandData = commandData;
             willHitTarget = WillHitTarget();
