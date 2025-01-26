@@ -231,7 +231,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 940484821}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -874,6 +874,7 @@ GameObject:
   - component: {fileID: 522226883}
   - component: {fileID: 522226882}
   - component: {fileID: 522226881}
+  - component: {fileID: 522226884}
   m_Layer: 5
   m_Name: Target Overlay Container
   m_TagString: Untagged
@@ -896,7 +897,7 @@ RectTransform:
   - {fileID: 1242843363}
   - {fileID: 1654983923}
   m_Father: {fileID: 940484821}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -967,6 +968,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 522226879}
   m_CullTransparentMesh: 1
+--- !u!225 &522226884
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522226879}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &780528418
 GameObject:
   m_ObjectHideFlags: 0
@@ -1384,8 +1397,8 @@ RectTransform:
   m_Children:
   - {fileID: 22985194}
   - {fileID: 1222372627}
-  - {fileID: 522226880}
   - {fileID: 101671527}
+  - {fileID: 522226880}
   m_Father: {fileID: 1182275442}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1471,7 +1484,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &988327834
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2789,6 +2802,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resultText: {fileID: 1682630446}
   homeButton: {fileID: 799045267}
+  replayButton: {fileID: 988327835}
 --- !u!1 &2089575972
 GameObject:
   m_ObjectHideFlags: 0
