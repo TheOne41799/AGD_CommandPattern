@@ -4,6 +4,6 @@ namespace Command.Input
     {
         Friendly,
         Enemy,
-        Self
+        Self,
     }
 }

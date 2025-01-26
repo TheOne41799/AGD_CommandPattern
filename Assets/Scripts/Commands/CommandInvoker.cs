@@ -1,6 +1,5 @@
-using System.Collections;
+using Command.Main;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Command.Commands
 {
@@ -13,7 +12,9 @@ namespace Command.Commands
             ExecuteCommand(commandToProcess);
             RegisterCommand(commandToProcess);
         }
+
         public void ExecuteCommand(ICommand commandToExecute) => commandToExecute.Execute();
+
         public void RegisterCommand(ICommand commandToRegister) => commandRegistry.Push(commandToRegister);
     }
 }
