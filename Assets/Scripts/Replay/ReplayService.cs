@@ -7,7 +7,7 @@ using UnityEngine.Playables;
 
 namespace Command.ReplayFunction
 {
-    public class ReplayService : MonoBehaviour
+    public class ReplayService
     {
         private Stack<ICommand> replayCommandStack;
 
@@ -19,8 +19,16 @@ namespace Command.ReplayFunction
 
         public void SetCommandStack(Stack<ICommand> commandsToSet) => replayCommandStack = new Stack<ICommand>(commandsToSet);
 
-        public void ExecuteNext()
+        /*public void ExecuteNext()
         {
+            if (replayCommandStack.Count > 0)
+                GameService.Instance.ProcessUnitCommand(replayCommandStack.Pop());
+        }*/
+
+        public IEnumerator ExecuteNext()
+        {
+            yield return new WaitForSeconds(1);
+
             if (replayCommandStack.Count > 0)
                 GameService.Instance.ProcessUnitCommand(replayCommandStack.Pop());
         }

@@ -7,10 +7,20 @@ namespace Command.Commands
     {
         private Stack<ICommand> commandRegistry = new Stack<ICommand>();
 
+        public CommandInvoker() => SubscribeToEvents();
+
         public void ProcessCommand(ICommand commandToProcess)
         {
             ExecuteCommand(commandToProcess);
             RegisterCommand(commandToProcess);
+        }
+
+        private void SubscribeToEvents() => GameService.Instance.EventService.OnReplayButtonClicked.AddListener(SetReplayStack);
+
+        public void SetReplayStack()
+        {
+            GameService.Instance.ReplayService.SetCommandStack(commandRegistry);
+            commandRegistry.Clear();
         }
 
         public void ExecuteCommand(ICommand commandToExecute) => commandToExecute.Execute();
